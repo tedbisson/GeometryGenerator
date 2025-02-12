@@ -191,5 +191,14 @@ namespace GeometryGenerator
         {
             m_trackingMouse = false;
         }
+
+        private void c_preview_MouseWheel(object sender, MouseEventArgs e)
+        {
+            float zoomDelta = 0.1f;
+            if (e.Delta < 0)
+                zoomDelta = -zoomDelta;
+
+            m_renderer.Zoom += zoomDelta;
+        }
     }
 }

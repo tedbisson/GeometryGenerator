@@ -8,6 +8,7 @@ namespace GeometryGenerator.Render
         public Vector3 Camera = new Vector3(0.0f, 0.0f, -3.0f);
         public float Angle = 0.0f;
         public float Elevation = 0.0f;
+        public float Zoom = 1.0f;
 
         private Control m_control;
         private Image m_buffer = new Bitmap(2, 2);
@@ -37,7 +38,9 @@ namespace GeometryGenerator.Render
 
             // Update the model transform.
             Matrix4x4 transform = Matrix4x4.CreateFromYawPitchRoll(Angle, Elevation, 0.0f);
-//            Matrix4x4 transform = Matrix4x4.CreateRotationY(Angle);
+            //            Matrix4x4 transform = Matrix4x4.CreateRotationY(Angle);
+
+            float zoom = m_zoom * Zoom;
 
             // Draw each mesh in the model.
             foreach (Mesh mesh in model.Meshes)
@@ -53,14 +56,14 @@ namespace GeometryGenerator.Render
                     {
                         // Project each of the vertices to the screen.
                         PointF a = new PointF(
-                            m_center.X + m_zoom * (A.X - Camera.X) / (A.Z - Camera.Z),
-                            m_center.Y + m_zoom * (A.Y - Camera.Y) / (A.Z - Camera.Z));
+                            m_center.X + zoom * (A.X - Camera.X) / (A.Z - Camera.Z),
+                            m_center.Y + zoom * (A.Y - Camera.Y) / (A.Z - Camera.Z));
                         PointF b = new PointF(
-                            m_center.X + m_zoom * (B.X - Camera.X) / (B.Z - Camera.Z),
-                            m_center.Y + m_zoom * (B.Y - Camera.Y) / (B.Z - Camera.Z));
+                            m_center.X + zoom * (B.X - Camera.X) / (B.Z - Camera.Z),
+                            m_center.Y + zoom * (B.Y - Camera.Y) / (B.Z - Camera.Z));
                         PointF c = new PointF(
-                            m_center.X + m_zoom * (C.X - Camera.X) / (C.Z - Camera.Z),
-                            m_center.Y + m_zoom * (C.Y - Camera.Y) / (C.Z - Camera.Z));
+                            m_center.X + zoom * (C.X - Camera.X) / (C.Z - Camera.Z),
+                            m_center.Y + zoom * (C.Y - Camera.Y) / (C.Z - Camera.Z));
 
                         // Draw the edges of the triangle.
                         gfx.DrawLine(Pens.White, a, b);

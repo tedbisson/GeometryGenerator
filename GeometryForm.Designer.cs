@@ -160,6 +160,7 @@
             c_preview.MouseLeave += c_preview_MouseLeave;
             c_preview.MouseMove += c_preview_MouseMove;
             c_preview.MouseUp += c_preview_MouseUp;
+            c_preview.MouseWheel += c_preview_MouseWheel;
             // 
             // c_saveModel
             // 
