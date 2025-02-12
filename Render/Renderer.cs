@@ -7,6 +7,7 @@ namespace GeometryGenerator.Render
     {
         public Vector3 Camera = new Vector3(0.0f, 0.0f, -3.0f);
         public float Angle = 0.0f;
+        public float Elevation = 0.0f;
 
         private Control m_control;
         private Image m_buffer = new Bitmap(2, 2);
@@ -23,19 +24,20 @@ namespace GeometryGenerator.Render
 
         public void DrawModel(Model model)
         {
-            long tickNow = DateTime.Now.Ticks;
-            TimeSpan delta = TimeSpan.FromTicks(tickNow - m_lastTick);
-            m_lastTick = tickNow;
-            Angle += (float)delta.TotalSeconds * 0.1f;
-            if (Angle > MathF.Tau)
-                Angle -= MathF.Tau;
+            //long tickNow = DateTime.Now.Ticks;
+            //TimeSpan delta = TimeSpan.FromTicks(tickNow - m_lastTick);
+            //m_lastTick = tickNow;
+            //Angle += (float)delta.TotalSeconds * 0.1f;
+            //if (Angle > MathF.Tau)
+            //    Angle -= MathF.Tau;
 
             // Create or resize surface if needed.
             Graphics gfx = PrepareSurface();
             gfx.FillRectangle(Brushes.Black, m_rect);
 
             // Update the model transform.
-            Matrix4x4 transform = Matrix4x4.CreateRotationY(Angle);
+            Matrix4x4 transform = Matrix4x4.CreateFromYawPitchRoll(Angle, Elevation, 0.0f);
+//            Matrix4x4 transform = Matrix4x4.CreateRotationY(Angle);
 
             // Draw each mesh in the model.
             foreach (Mesh mesh in model.Meshes)

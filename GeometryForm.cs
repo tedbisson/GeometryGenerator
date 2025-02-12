@@ -8,7 +8,10 @@ namespace GeometryGenerator
     public partial class GeometryForm : Form
     {
         private Model m_model = new Model();
-        private Renderer m_render;
+        private Renderer m_renderer;
+
+        private Point m_lastMouse = Point.Empty;
+        private bool m_trackingMouse = false;
 
         public GeometryForm()
         {
@@ -21,7 +24,7 @@ namespace GeometryGenerator
             c_tracks.Text = "8";
             c_innerRadius.Text = "1.2";
             c_outerRadius.Text = "1.6";
-            m_render = new Renderer(c_preview);
+            m_renderer = new Renderer(c_preview);
 
             Application.Idle += new EventHandler(OnIdle);
         }
@@ -29,7 +32,7 @@ namespace GeometryGenerator
         private void GeometryForm_Load(object sender, EventArgs e)
         {
             c_preview.BackColor = Color.Black;
-            m_render.DrawModel(m_model);
+            m_renderer.DrawModel(m_model);
         }
 
         private void OnCreateSphere(object sender, EventArgs e)
@@ -54,7 +57,7 @@ namespace GeometryGenerator
             m_model.Meshes.Add(SphereGen.Create(stacks, slices));
 
             // Redraw the model view.
-            m_render.DrawModel(m_model);
+            m_renderer.DrawModel(m_model);
         }
 
         private void OnCreateGeodesic(object sender, EventArgs e)
@@ -77,7 +80,7 @@ namespace GeometryGenerator
             m_model.Meshes.Add(GeodesicGen.Create(divisions));
 
             // Redraw the model view.
-            m_render.DrawModel(m_model);
+            m_renderer.DrawModel(m_model);
         }
 
         private void c_createRing_Click(object sender, EventArgs e)
@@ -111,7 +114,7 @@ namespace GeometryGenerator
                         outerRadius)));
 
             // Redraw the model view.
-            m_render.DrawModel(m_model);
+            m_renderer.DrawModel(m_model);
         }
 
         private void OnSaveModel(object sender, EventArgs e)
@@ -156,8 +159,37 @@ namespace GeometryGenerator
         {
             while (ApplicationExtensions.IsIdle() == true)
             {
-                m_render.DrawModel(m_model);
+                m_renderer.DrawModel(m_model);
             }
+        }
+
+        private void c_preview_MouseDown(object sender, MouseEventArgs e)
+        {
+            m_lastMouse = e.Location;
+            m_trackingMouse = true;
+        }
+
+        private void c_preview_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (m_trackingMouse == false)
+            {
+                return;
+            }
+
+            float angleDelta = 0.003f;
+            m_renderer.Angle += angleDelta * (float)(e.Location.X - m_lastMouse.X);
+            m_renderer.Elevation -= angleDelta * (float)(e.Location.Y - m_lastMouse.Y);
+            m_lastMouse = e.Location;
+        }
+
+        private void c_preview_MouseUp(object sender, MouseEventArgs e)
+        {
+            m_trackingMouse = false;
+        }
+
+        private void c_preview_MouseLeave(object sender, EventArgs e)
+        {
+            m_trackingMouse = false;
         }
     }
 }

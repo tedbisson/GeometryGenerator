@@ -41,15 +41,15 @@
             c_preview = new Panel();
             c_saveModel = new Button();
             groupBox3 = new GroupBox();
-            c_tracks = new TextBox();
-            label4 = new Label();
-            c_createRing = new Button();
-            c_sectors = new TextBox();
-            label5 = new Label();
             c_outerRadius = new TextBox();
             label6 = new Label();
             c_innerRadius = new TextBox();
             label7 = new Label();
+            c_sectors = new TextBox();
+            label5 = new Label();
+            c_tracks = new TextBox();
+            label4 = new Label();
+            c_createRing = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -156,6 +156,10 @@
             c_preview.Name = "c_preview";
             c_preview.Size = new Size(1283, 951);
             c_preview.TabIndex = 9;
+            c_preview.MouseDown += c_preview_MouseDown;
+            c_preview.MouseLeave += c_preview_MouseLeave;
+            c_preview.MouseMove += c_preview_MouseMove;
+            c_preview.MouseUp += c_preview_MouseUp;
             // 
             // c_saveModel
             // 
@@ -185,48 +189,6 @@
             groupBox3.TabIndex = 9;
             groupBox3.TabStop = false;
             groupBox3.Text = "Ring";
-            // 
-            // c_tracks
-            // 
-            c_tracks.Location = new Point(103, 57);
-            c_tracks.Name = "c_tracks";
-            c_tracks.Size = new Size(112, 31);
-            c_tracks.TabIndex = 4;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(38, 60);
-            label4.Name = "label4";
-            label4.Size = new Size(59, 25);
-            label4.TabIndex = 8;
-            label4.Text = "Tracks";
-            // 
-            // c_createRing
-            // 
-            c_createRing.Location = new Point(103, 209);
-            c_createRing.Name = "c_createRing";
-            c_createRing.Size = new Size(112, 34);
-            c_createRing.TabIndex = 1;
-            c_createRing.Text = "Create";
-            c_createRing.UseVisualStyleBackColor = true;
-            c_createRing.Click += c_createRing_Click;
-            // 
-            // c_sectors
-            // 
-            c_sectors.Location = new Point(103, 94);
-            c_sectors.Name = "c_sectors";
-            c_sectors.Size = new Size(112, 31);
-            c_sectors.TabIndex = 9;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(27, 97);
-            label5.Name = "label5";
-            label5.Size = new Size(70, 25);
-            label5.TabIndex = 10;
-            label5.Text = "Sectors";
             // 
             // c_outerRadius
             // 
@@ -259,6 +221,48 @@
             label7.Size = new Size(52, 25);
             label7.TabIndex = 12;
             label7.Text = "Inner";
+            // 
+            // c_sectors
+            // 
+            c_sectors.Location = new Point(103, 94);
+            c_sectors.Name = "c_sectors";
+            c_sectors.Size = new Size(112, 31);
+            c_sectors.TabIndex = 9;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(27, 97);
+            label5.Name = "label5";
+            label5.Size = new Size(70, 25);
+            label5.TabIndex = 10;
+            label5.Text = "Sectors";
+            // 
+            // c_tracks
+            // 
+            c_tracks.Location = new Point(103, 57);
+            c_tracks.Name = "c_tracks";
+            c_tracks.Size = new Size(112, 31);
+            c_tracks.TabIndex = 4;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(38, 60);
+            label4.Name = "label4";
+            label4.Size = new Size(59, 25);
+            label4.TabIndex = 8;
+            label4.Text = "Tracks";
+            // 
+            // c_createRing
+            // 
+            c_createRing.Location = new Point(103, 209);
+            c_createRing.Name = "c_createRing";
+            c_createRing.Size = new Size(112, 34);
+            c_createRing.TabIndex = 1;
+            c_createRing.Text = "Create";
+            c_createRing.UseVisualStyleBackColor = true;
+            c_createRing.Click += c_createRing_Click;
             // 
             // GeometryForm
             // 
