@@ -2,7 +2,6 @@ using GeometryGenerator.Generators;
 using GeometryGenerator.GeoGen;
 using GeometryGenerator.Geometry;
 using GeometryGenerator.Render;
-using Microsoft.VisualBasic.Logging;
 
 namespace GeometryGenerator
 {
