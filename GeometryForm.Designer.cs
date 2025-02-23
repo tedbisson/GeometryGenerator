@@ -78,6 +78,7 @@
             c_create.TabIndex = 12;
             c_create.Text = "Create";
             c_create.UseVisualStyleBackColor = true;
+            c_create.Visible = false;
             c_create.Click += c_create_Click;
             // 
             // imageList1

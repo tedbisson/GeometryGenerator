@@ -144,6 +144,7 @@ namespace GeometryGenerator
                 c_create.Location = new Point(
                     c_create.Location.X,
                     optionsPanel.Location.Y + optionsPanel.Size.Height + 10);
+                c_create.Visible = true;
             }
         }
 
