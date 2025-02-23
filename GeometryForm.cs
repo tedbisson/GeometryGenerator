@@ -155,6 +155,8 @@ namespace GeometryGenerator
                 return;
 
             m_model = currentGenerator.Create(currentGenerator.GetValues());
+
+            m_renderer.ResetCamera();
         }
     }
 }

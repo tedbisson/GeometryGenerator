@@ -49,8 +49,8 @@ namespace GeometryGenerator.Generators
                 {
                     Vector3 v = new Vector3(
                         radius * MathF.Sin(theta),
-                        radius * MathF.Cos(theta),
-                        0.0f);
+                        0.0f,
+                        radius * MathF.Cos(theta));
 
                     mesh.AddVertex(v);
 

@@ -77,6 +77,13 @@ namespace GeometryGenerator.Render
             m_control.CreateGraphics().DrawImage(m_buffer, 0, 0);
         }
 
+        public void ResetCamera()
+        {
+            Angle = 0.0f;
+            Elevation = -0.2f;
+            Zoom = 1.0f;
+        }
+
         private bool FacePointsToCamera(Vector3 a, Vector3 b, Vector3 c)
         {
             Vector3 ab = b - a;
