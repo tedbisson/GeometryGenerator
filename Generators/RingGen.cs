@@ -1,7 +1,7 @@
 ﻿using GeometryGenerator.Geometry;
 using System.Numerics;
 
-namespace GeometryGenerator.Generator
+namespace GeometryGenerator.Generators
 {
     public static class RingGen
     {

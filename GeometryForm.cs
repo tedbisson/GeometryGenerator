@@ -1,7 +1,8 @@
-using GeometryGenerator.Generator;
+using GeometryGenerator.Generators;
 using GeometryGenerator.GeoGen;
 using GeometryGenerator.Geometry;
 using GeometryGenerator.Render;
+using Microsoft.VisualBasic.Logging;
 
 namespace GeometryGenerator
 {
@@ -12,6 +13,8 @@ namespace GeometryGenerator
 
         private Point m_lastMouse = Point.Empty;
         private bool m_trackingMouse = false;
+
+        private List<Generator> m_geometries = new List<Generator> ();
 
         public GeometryForm()
         {
@@ -27,12 +30,28 @@ namespace GeometryGenerator
             m_renderer = new Renderer(c_preview);
 
             Application.Idle += new EventHandler(OnIdle);
+
+            m_geometries.Add(new Sphere());
+            m_geometries.Add(new Geodesic());
+            m_geometries.Add(new Disc());
+            m_geometries.Add(new Ring());
         }
 
         private void GeometryForm_Load(object sender, EventArgs e)
         {
             c_preview.BackColor = Color.Black;
             m_renderer.DrawModel(m_model);
+
+            // Fill in the list of available geometries to create.
+            c_geometries.Items.Clear();
+            foreach (Generator generator in m_geometries)
+            {
+                c_geometries.Items.Add(generator.Name);
+
+                // Select the sphere by default.
+                if (generator.Name == "Sphere")
+                    c_geometries.SelectedIndex = c_geometries.Items.Count - 1;
+            }
         }
 
         private void OnCreateSphere(object sender, EventArgs e)

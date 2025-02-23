@@ -50,6 +50,7 @@
             c_tracks = new TextBox();
             label4 = new Label();
             c_createRing = new Button();
+            c_geometries = new ComboBox();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -103,7 +104,7 @@
             groupBox1.Controls.Add(c_createSphere);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(c_slices);
-            groupBox1.Location = new Point(12, 12);
+            groupBox1.Location = new Point(12, 436);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(241, 180);
             groupBox1.TabIndex = 5;
@@ -142,7 +143,7 @@
             groupBox2.Controls.Add(c_divisons);
             groupBox2.Controls.Add(label3);
             groupBox2.Controls.Add(c_createGeodesic);
-            groupBox2.Location = new Point(12, 202);
+            groupBox2.Location = new Point(12, 626);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(241, 198);
             groupBox2.TabIndex = 8;
@@ -154,7 +155,7 @@
             c_preview.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             c_preview.Location = new Point(270, 21);
             c_preview.Name = "c_preview";
-            c_preview.Size = new Size(1283, 951);
+            c_preview.Size = new Size(1520, 1133);
             c_preview.TabIndex = 9;
             c_preview.MouseDown += c_preview_MouseDown;
             c_preview.MouseLeave += c_preview_MouseLeave;
@@ -165,7 +166,7 @@
             // c_saveModel
             // 
             c_saveModel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            c_saveModel.Location = new Point(38, 938);
+            c_saveModel.Location = new Point(38, 1120);
             c_saveModel.Name = "c_saveModel";
             c_saveModel.Size = new Size(189, 34);
             c_saveModel.TabIndex = 10;
@@ -184,7 +185,7 @@
             groupBox3.Controls.Add(c_tracks);
             groupBox3.Controls.Add(label4);
             groupBox3.Controls.Add(c_createRing);
-            groupBox3.Location = new Point(12, 410);
+            groupBox3.Location = new Point(12, 834);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(241, 265);
             groupBox3.TabIndex = 9;
@@ -265,11 +266,21 @@
             c_createRing.UseVisualStyleBackColor = true;
             c_createRing.Click += c_createRing_Click;
             // 
+            // c_geometries
+            // 
+            c_geometries.FormattingEnabled = true;
+            c_geometries.Location = new Point(12, 21);
+            c_geometries.Name = "c_geometries";
+            c_geometries.Size = new Size(241, 33);
+            c_geometries.Sorted = true;
+            c_geometries.TabIndex = 11;
+            // 
             // GeometryForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1565, 984);
+            ClientSize = new Size(1802, 1166);
+            Controls.Add(c_geometries);
             Controls.Add(groupBox3);
             Controls.Add(c_saveModel);
             Controls.Add(c_preview);
@@ -312,5 +323,6 @@
         private TextBox c_tracks;
         private Label label4;
         private Button c_createRing;
+        private ComboBox c_geometries;
     }
 }
