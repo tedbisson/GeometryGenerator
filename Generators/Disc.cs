@@ -1,29 +1,39 @@
 ﻿using GeometryGenerator.Geometry;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GeometryGenerator.Generators
 {
-    public class Disc : Generator
+    public class Disc : OptionsPanel, IGenerator
     {
-        //private int m_sectors = 48;
-        //private int m_tracks = 8;
-        //private float m_innerRadius = 1.2f;
-        //private float m_outerRadius = 1.6f;
-
-        public string Name { get { return "Disc"; } }
-
-        public Panel OptionsPanel()
+        /// <summary>
+        /// Descriptions for each of the fields that should be available in
+        /// the options panel, needed to generate this geometry.   
+        /// </summary>
+        private OptionsPanel.Descriptor[] m_optionDescriptors =
         {
-            return new Panel();
+            new OptionsPanel.Descriptor("Sectors", 32, 3, 512),
+            new OptionsPanel.Descriptor("Tracks", 4, 1, 128),
+            new OptionsPanel.Descriptor("InnerRadius", 1.2f, 0.1f, 10.0f),
+            new OptionsPanel.Descriptor("OuterRadius", 1.6f, 0.1f, 10.0f),
+        };
+
+        public Disc()
+        {
+            CreateFromDescriptors(m_optionDescriptors);
         }
 
-        public Model Create()
+        public override string ToString()
         {
+            return "Disc";
+        }
+
+        public Model Create(Dictionary<string, float> optionValues)
+        {
+            // Extract the required creation values.
+            int sectors = (int)optionValues["Stacks"];
+            int tracks = (int)optionValues["Slices"];
+            float innerRadius = optionValues["InnerRadius"];
+            float outerRadius = optionValues["OuterRadius"];
+
             return new Model();
         }
     }

@@ -14,7 +14,8 @@ namespace GeometryGenerator
         private Point m_lastMouse = Point.Empty;
         private bool m_trackingMouse = false;
 
-        private List<Generator> m_geometries = new List<Generator> ();
+        private List<IGenerator> m_geometries = new List<IGenerator>();
+        private Panel? m_currentPanel = null;
 
         public GeometryForm()
         {
@@ -31,27 +32,17 @@ namespace GeometryGenerator
 
             Application.Idle += new EventHandler(OnIdle);
 
-            m_geometries.Add(new Sphere());
-            m_geometries.Add(new Geodesic());
-            m_geometries.Add(new Disc());
-            m_geometries.Add(new Ring());
+            c_geometries.Items.Clear();
+            c_geometries.Items.Add(new Sphere());
+            c_geometries.Items.Add(new Geodesic());
+            c_geometries.Items.Add(new Disc());
+            c_geometries.Items.Add(new Ring());
         }
 
         private void GeometryForm_Load(object sender, EventArgs e)
         {
             c_preview.BackColor = Color.Black;
             m_renderer.DrawModel(m_model);
-
-            // Fill in the list of available geometries to create.
-            c_geometries.Items.Clear();
-            foreach (Generator generator in m_geometries)
-            {
-                c_geometries.Items.Add(generator.Name);
-
-                // Select the sphere by default.
-                if (generator.Name == "Sphere")
-                    c_geometries.SelectedIndex = c_geometries.Items.Count - 1;
-            }
         }
 
         private void OnCreateSphere(object sender, EventArgs e)
@@ -218,6 +209,40 @@ namespace GeometryGenerator
                 zoomDelta = -zoomDelta;
 
             m_renderer.Zoom += zoomDelta;
+        }
+
+        private void c_geometries_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            IGenerator? currentGenerator = c_geometries.SelectedItem as IGenerator;
+            if (currentGenerator == null)
+                return;
+
+            Panel optionsPanel = currentGenerator.GetOptionsPanel();
+
+            if (m_currentPanel != optionsPanel)
+            {
+                if (m_currentPanel != null)
+                {
+                    Controls.Remove(m_currentPanel);
+                }
+
+                m_currentPanel = optionsPanel;
+                optionsPanel.Location = new Point(c_geometries.Location.X, c_geometries.Location.Y + 40);
+                Controls.Add(optionsPanel);
+
+                c_create.Location = new Point(
+                    c_create.Location.X,
+                    optionsPanel.Location.Y + optionsPanel.Size.Height + 10);
+            }
+        }
+
+        private void c_create_Click(object sender, EventArgs e)
+        {
+            IGenerator? currentGenerator = c_geometries.SelectedItem as IGenerator;
+            if (currentGenerator == null)
+                return;
+
+            m_model = currentGenerator.Create(currentGenerator.GetValues());
         }
     }
 }

@@ -8,17 +8,35 @@ using System.Threading.Tasks;
 
 namespace GeometryGenerator.Generators
 {
-    public class Ring : Generator
+    public class Ring : OptionsPanel, IGenerator
     {
-        public string Name { get { return "Ring"; } }
-
-        public Panel OptionsPanel()
+        /// <summary>
+        /// Descriptions for each of the fields that should be available in
+        /// the options panel, needed to generate this geometry.   
+        /// </summary>
+        private OptionsPanel.Descriptor[] m_optionDescriptors =
         {
-            return new Panel();
+            new OptionsPanel.Descriptor("Segments", 32, 3, 512),
+            new OptionsPanel.Descriptor("Width", 1.0f, 0.1f, 10.0f),
+        };
+
+        public Ring()
+        {
+            CreateFromDescriptors(m_optionDescriptors);
         }
 
-        public Model Create()
+        public override string ToString()
         {
+            return "Ring";
+        }
+
+        public Model Create(Dictionary<string, float> optionValues)
+        {
+            // Extract the required creation values.
+            int segments = (int)optionValues["Segments"];
+            float width = optionValues["Width"];
+
+
             return new Model();
         }
     }

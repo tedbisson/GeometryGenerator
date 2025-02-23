@@ -51,6 +51,7 @@
             label4 = new Label();
             c_createRing = new Button();
             c_geometries = new ComboBox();
+            c_create = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -274,12 +275,24 @@
             c_geometries.Size = new Size(241, 33);
             c_geometries.Sorted = true;
             c_geometries.TabIndex = 11;
+            c_geometries.SelectionChangeCommitted += c_geometries_SelectionChangeCommitted;
+            // 
+            // c_create
+            // 
+            c_create.Location = new Point(121, 104);
+            c_create.Name = "c_create";
+            c_create.Size = new Size(126, 34);
+            c_create.TabIndex = 12;
+            c_create.Text = "Create";
+            c_create.UseVisualStyleBackColor = true;
+            c_create.Click += c_create_Click;
             // 
             // GeometryForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1802, 1166);
+            Controls.Add(c_create);
             Controls.Add(c_geometries);
             Controls.Add(groupBox3);
             Controls.Add(c_saveModel);
@@ -324,5 +337,6 @@
         private Label label4;
         private Button c_createRing;
         private ComboBox c_geometries;
+        private Button c_create;
     }
 }

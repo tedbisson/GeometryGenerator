@@ -2,19 +2,19 @@
 
 namespace GeometryGenerator.Generators
 {
-    interface Generator
+    interface IGenerator
     {
         /// <summary>
         /// Name describing the generator implementation.
         /// </summary>
-        string Name { get; }
+        string ToString();
 
         /// <summary>
         /// Returns a WinForms Panel containing appropriate fields for
         /// the creation of the implemented geometry.
         /// </summary>
         /// <returns>A Panel to be displayed to the user.</returns>
-        Panel OptionsPanel();
+        Panel GetOptionsPanel();
 
         /// <summary>
         /// Creates a model for the geometry implementation.
@@ -22,6 +22,13 @@ namespace GeometryGenerator.Generators
         /// Creation parameters are retrieved from the OptionsPanel.
         /// </summary>
         /// <returns>A new model with the requested geometry.</returns>
-        Model Create();
+        Model Create(Dictionary<string, float> optionValues);
+
+        /// <summary>
+        /// Returns a dictionary containing the values to be used to
+        /// generate the geometyr.
+        /// </summary>
+        /// <returns></returns>
+        Dictionary<string, float> GetValues();
     }
 }

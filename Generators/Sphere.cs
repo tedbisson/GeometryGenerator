@@ -8,20 +8,35 @@ using System.Threading.Tasks;
 
 namespace GeometryGenerator.Generators
 {
-    public class Sphere : Generator
+    public class Sphere : OptionsPanel, IGenerator
     {
-        //private int m_stacks = 32;
-        //private int m_slices = 32;
-
-        public string Name { get { return "Sphere"; } }
-
-        public Panel OptionsPanel()
+        /// <summary>
+        /// Descriptions for each of the fields that should be available in
+        /// the options panel, needed to generate this geometry.   
+        /// </summary>
+        private OptionsPanel.Descriptor[] m_optionDescriptors = 
         {
-            return new Panel();
+            new OptionsPanel.Descriptor("Stacks", 32, 3, 256),
+            new OptionsPanel.Descriptor("Slices", 32, 4, 256),
+        };
+
+        public Sphere()
+        {
+            CreateFromDescriptors(m_optionDescriptors);
         }
 
-        public Model Create()
+        public override string ToString()
         {
+            return "Sphere";
+        }
+
+        public Model Create(Dictionary<string, float> optionValues)
+        {
+            // Extract the required creation values.
+            int stacks = (int)optionValues["Stacks"];
+            int slices = (int)optionValues["Slices"];
+
+
             return new Model();
         }
     }

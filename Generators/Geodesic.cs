@@ -1,22 +1,33 @@
 ﻿using GeometryGenerator.Geometry;
-using System;
-using System.Collections.Generic;
 
 namespace GeometryGenerator.Generators
 {
-    public class Geodesic : Generator
+    public class Geodesic : OptionsPanel, IGenerator
     {
-        //private int m_divisions = 3;
-
-        public string Name { get { return "Geodesic"; } }
-
-        public Panel OptionsPanel()
+        /// <summary>
+        /// Descriptions for each of the fields that should be available in
+        /// the options panel, needed to generate this geometry.   
+        /// </summary>
+        private OptionsPanel.Descriptor[] m_optionDescriptors =
         {
-            return new Panel();
+            new OptionsPanel.Descriptor("Divisions", 3, 0, 6),
+        };
+
+        public Geodesic()
+        {
+            CreateFromDescriptors(m_optionDescriptors);
         }
 
-        public Model Create()
+        public override string ToString()
         {
+            return "Geodesic";
+        }
+
+        public Model Create(Dictionary<string, float> optionValues)
+        {
+            // Extract the required creation values.
+            int divisions = (int)optionValues["Divisions"];
+
             return new Model();
         }
     }
