@@ -1,4 +1,5 @@
 ﻿using GeometryGenerator.Geometry;
+using System.Numerics;
 
 namespace GeometryGenerator.Generators
 {
@@ -30,8 +31,40 @@ namespace GeometryGenerator.Generators
             int segments = (int)optionValues["Segments"];
             float width = optionValues["Width"];
 
+            Mesh mesh = new Mesh("Ring");
 
-            return new Model();
+            float deltaTheta = MathF.Tau / segments;
+
+            // Create vertices around the ring.
+            float theta = 0.0f;
+            float dx = width / 2.0f;
+            for (int i = 0; i < segments; ++i)
+            {
+                float y = MathF.Sin(theta);
+                float z = MathF.Cos(theta);
+
+                mesh.AddVertex(new Vector3(-dx, y, z));
+                mesh.AddVertex(new Vector3(dx, y, z));
+
+                theta += deltaTheta;
+            }
+
+            // Create the faces.
+            for (int i = 0; i < segments - 1; ++i)
+            {
+                int a = i * 2;
+
+                mesh.AddFace(new Face(a, a + 1, a + 3));
+                mesh.AddFace(new Face(a, a + 3, a + 2));
+            }
+            {
+                int a = (segments - 1) * 2;
+
+                mesh.AddFace(new Face(a, a + 1, 1));
+                mesh.AddFace(new Face(a, 1, 0));
+            }
+
+            return new Model(mesh);
         }
     }
 }

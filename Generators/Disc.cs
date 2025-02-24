@@ -40,7 +40,7 @@ namespace GeometryGenerator.Generators
             float deltaTheta = MathF.Tau / sectors;
             float deltaRadius = (outerRadius - innerRadius) / tracks;
 
-            // Create vertices around the ring.
+            // Create vertices around the disc.
             float radius = innerRadius;
             for (int track = 0; track <= tracks; ++track)
             {
