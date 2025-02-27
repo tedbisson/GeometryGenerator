@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GeometryGenerator.Geometry;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Text;
@@ -35,7 +36,7 @@ namespace GeometryGenerator.Generators
 
         // The panel containing the options controls.
         private Panel m_panel;
-        private Dictionary<string, TextBox> m_map = new Dictionary<string, TextBox>();
+        private Dictionary<TextBox, Descriptor> m_map = new Dictionary<TextBox, Descriptor>();
 
         /// <summary>
         /// Constructor, creates an empty panel.
@@ -68,9 +69,10 @@ namespace GeometryGenerator.Generators
                 textBox.Text = descriptor.DefaultValue.ToString();
                 textBox.Location = new Point(textBoxX, y);
                 textBox.Size = new Size(textBoxWidth, TEXTBOX_HEIGHT);
+                textBox.TextChanged += OnTextChanged;
                 m_panel.Controls.Add(textBox);
 
-                m_map.Add(descriptor.Name, textBox);
+                m_map.Add(textBox, descriptor);
 
                 y += 38;
             }
@@ -90,13 +92,31 @@ namespace GeometryGenerator.Generators
             foreach (var item in m_map)
             {
                 float v = 0.0f;
-                if (float.TryParse(item.Value.Text, out v) == true)
+                if (float.TryParse(item.Key.Text, out v) == true)
                 {
-                    values.Add(item.Key, v);
+                    values.Add(item.Value.Name, v);
                 }
             }
 
             return values;
+        }
+
+        private void OnTextChanged(object? sender, EventArgs e)
+        {
+            TextBox? textBox = sender as TextBox;
+            if (textBox != null && m_map.ContainsKey(textBox) == true)
+            {
+                Descriptor descriptor = m_map[textBox];
+
+                float value = 0.0f;
+                if (float.TryParse(textBox.Text, out value) == true)
+                {
+                    if (value >= descriptor.MinValue && value <= descriptor.MaxValue)
+                    {
+                        GeometryForm.MainForm?.RebuildModel();
+                    }
+                }
+            }
         }
     }
 }

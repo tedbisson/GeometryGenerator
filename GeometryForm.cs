@@ -7,7 +7,9 @@ namespace GeometryGenerator
 {
     public partial class GeometryForm : Form
     {
-        private Model m_model = new Model();
+        public static GeometryForm? MainForm = null;
+
+        private Model m_model;
         private Renderer m_renderer;
 
         private Point m_lastMouse = Point.Empty;
@@ -18,6 +20,8 @@ namespace GeometryGenerator
 
         public GeometryForm()
         {
+            MainForm = this;
+
             InitializeComponent();
             m_model = new Model();
             m_renderer = new Renderer(c_preview);
@@ -140,22 +144,19 @@ namespace GeometryGenerator
                 optionsPanel.Location = new Point(c_geometries.Location.X, c_geometries.Location.Y + 40);
                 Controls.Add(optionsPanel);
 
-                c_create.Location = new Point(
-                    c_create.Location.X,
-                    optionsPanel.Location.Y + optionsPanel.Size.Height + 10);
-                c_create.Visible = true;
+                m_model = currentGenerator.Create(currentGenerator.GetValues());
+
+                m_renderer.ResetCamera();
             }
         }
 
-        private void c_create_Click(object sender, EventArgs e)
+        public void RebuildModel()
         {
             IGenerator? currentGenerator = c_geometries.SelectedItem as IGenerator;
             if (currentGenerator == null)
                 return;
 
             m_model = currentGenerator.Create(currentGenerator.GetValues());
-
-            m_renderer.ResetCamera();
         }
     }
 }

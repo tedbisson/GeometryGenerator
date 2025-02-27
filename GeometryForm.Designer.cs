@@ -32,7 +32,6 @@
             c_preview = new Panel();
             c_saveModel = new Button();
             c_geometries = new ComboBox();
-            c_create = new Button();
             imageList1 = new ImageList(components);
             SuspendLayout();
             // 
@@ -70,17 +69,6 @@
             c_geometries.TabIndex = 11;
             c_geometries.SelectionChangeCommitted += c_geometries_SelectionChangeCommitted;
             // 
-            // c_create
-            // 
-            c_create.Location = new Point(121, 104);
-            c_create.Name = "c_create";
-            c_create.Size = new Size(126, 34);
-            c_create.TabIndex = 12;
-            c_create.Text = "Create";
-            c_create.UseVisualStyleBackColor = true;
-            c_create.Visible = false;
-            c_create.Click += c_create_Click;
-            // 
             // imageList1
             // 
             imageList1.ColorDepth = ColorDepth.Depth32Bit;
@@ -92,7 +80,6 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1727, 973);
-            Controls.Add(c_create);
             Controls.Add(c_geometries);
             Controls.Add(c_saveModel);
             Controls.Add(c_preview);
@@ -107,7 +94,6 @@
         private Panel c_preview;
         private Button c_saveModel;
         private ComboBox c_geometries;
-        private Button c_create;
         private ImageList imageList1;
     }
 }
