@@ -20,8 +20,8 @@ namespace GeometryGenerator.Generators
         /// </summary>
         private OptionsPanel.Descriptor[] m_optionDescriptors = 
         {
-            new OptionsPanel.Descriptor("Stacks", 32, 3, 256),
-            new OptionsPanel.Descriptor("Slices", 32, 4, 256),
+            new OptionsPanel.Descriptor("Stacks", 32, 3, 256, false, 1),
+            new OptionsPanel.Descriptor("Slices", 32, 4, 256, false, 1),
         };
 
         public Sphere()

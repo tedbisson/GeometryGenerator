@@ -11,8 +11,8 @@ namespace GeometryGenerator.Generators
         /// </summary>
         private OptionsPanel.Descriptor[] m_optionDescriptors =
         {
-            new OptionsPanel.Descriptor("Segments", 32, 3, 512),
-            new OptionsPanel.Descriptor("Width", 1.0f, 0.1f, 10.0f),
+            new OptionsPanel.Descriptor("Segments", 32, 3, 512, false, 1),
+            new OptionsPanel.Descriptor("Width", 1.0f, 0.1f, 10.0f, true, 0.1f),
         };
 
         public Ring()

@@ -19,7 +19,7 @@ namespace GeometryGenerator.Generators
         /// </summary>
         private OptionsPanel.Descriptor[] m_optionDescriptors =
         {
-            new OptionsPanel.Descriptor("Divisions", 3, 0, 6),
+            new OptionsPanel.Descriptor("Divisions", 3, 0, 6, false, 1),
         };
 
         public Geodesic()

@@ -11,10 +11,10 @@ namespace GeometryGenerator.Generators
         /// </summary>
         private OptionsPanel.Descriptor[] m_optionDescriptors =
         {
-            new OptionsPanel.Descriptor("Sectors", 32, 3, 512),
-            new OptionsPanel.Descriptor("Tracks", 4, 1, 128),
-            new OptionsPanel.Descriptor("InnerRadius", 1.2f, 0.1f, 10.0f),
-            new OptionsPanel.Descriptor("OuterRadius", 1.6f, 0.1f, 10.0f),
+            new OptionsPanel.Descriptor("Sectors", 32, 3, 512, false, 1),
+            new OptionsPanel.Descriptor("Tracks", 4, 1, 128, false, 1),
+            new OptionsPanel.Descriptor("InnerRadius", 1.2f, 0.1f, 10.0f, true, 0.1f),
+            new OptionsPanel.Descriptor("OuterRadius", 1.6f, 0.1f, 10.0f, true, 0.1f),
         };
 
         public Disc()
