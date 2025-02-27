@@ -34,6 +34,8 @@ namespace GeometryGenerator
             c_geometries.Items.Add(new Disc());
             c_geometries.Items.Add(new Ring());
             c_geometries.Items.Add(new Icosohedron());
+            c_geometries.Items.Add(new Tetrahedron());
+            c_geometries.Items.Add(new Cube());
         }
 
         private void GeometryForm_Load(object sender, EventArgs e)
