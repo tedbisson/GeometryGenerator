@@ -33,6 +33,7 @@ namespace GeometryGenerator
             c_geometries.Items.Add(new Geodesic());
             c_geometries.Items.Add(new Disc());
             c_geometries.Items.Add(new Ring());
+            c_geometries.Items.Add(new Icosohedron());
         }
 
         private void GeometryForm_Load(object sender, EventArgs e)

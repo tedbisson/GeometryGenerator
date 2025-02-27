@@ -37,8 +37,9 @@ namespace GeometryGenerator.Generators
             // Extract the required creation values.
             int divisions = (int)optionValues["Divisions"];
 
-            // Create the mesh for the geodesic geometry.
-            Mesh mesh = BaseIcosohedron();
+            Icosohedron icosohedron = new Icosohedron();
+            Model model = icosohedron.Create(new Dictionary<string, float>());
+            Mesh mesh = model.Meshes[0];
             mesh.Name = "Geodesic";
 
             for (int i = 0; i < divisions; ++i)
@@ -46,7 +47,7 @@ namespace GeometryGenerator.Generators
                 SubdivideFaces(mesh);
             }
 
-            return new Model(mesh);
+            return model;
         }
 
         /// <summary>
@@ -78,58 +79,6 @@ namespace GeometryGenerator.Generators
                 mesh.Faces.Add(new Face(f, e, c));
                 mesh.Faces.Add(new Face(d, e, f));
             }
-        }
-
-        /// <summary>
-        /// Mathematically generates an isocohedron.
-        /// </summary>
-        /// <returns>A mesh representing a unit icosohedron.</returns>
-        private Mesh BaseIcosohedron()
-        {
-            Mesh mesh = new Mesh("Icosohedron");
-
-            float phi = (1.0f + MathF.Sqrt(5.0f)) * 0.5f; // golden ratio
-            float a = 1.0f;
-            float b = 1.0f / phi;
-
-            // Manually add each vertex.
-            mesh.AddVertex(Vector3.Normalize(new Vector3(0, b, -a)));
-            mesh.AddVertex(Vector3.Normalize(new Vector3(b, a, 0)));
-            mesh.AddVertex(Vector3.Normalize(new Vector3(-b, a, 0)));
-            mesh.AddVertex(Vector3.Normalize(new Vector3(0, b, a)));
-            mesh.AddVertex(Vector3.Normalize(new Vector3(0, -b, a)));
-            mesh.AddVertex(Vector3.Normalize(new Vector3(-a, 0, b)));
-            mesh.AddVertex(Vector3.Normalize(new Vector3(0, -b, -a)));
-            mesh.AddVertex(Vector3.Normalize(new Vector3(a, 0, -b)));
-            mesh.AddVertex(Vector3.Normalize(new Vector3(a, 0, b)));
-            mesh.AddVertex(Vector3.Normalize(new Vector3(-a, 0, -b)));
-            mesh.AddVertex(Vector3.Normalize(new Vector3(b, -a, 0)));
-            mesh.AddVertex(Vector3.Normalize(new Vector3(-b, -a, 0)));
-
-            // Add all faces.
-            mesh.AddFace(new Face(2, 1, 0));
-            mesh.AddFace(new Face(2, 1, 0));
-            mesh.AddFace(new Face(1, 2, 3));
-            mesh.AddFace(new Face(5, 4, 3));
-            mesh.AddFace(new Face(4, 8, 3));
-            mesh.AddFace(new Face(7, 6, 0));
-            mesh.AddFace(new Face(6, 9, 0));
-            mesh.AddFace(new Face(11, 10, 4));
-            mesh.AddFace(new Face(10, 11, 6));
-            mesh.AddFace(new Face(9, 5, 2));
-            mesh.AddFace(new Face(5, 9, 11));
-            mesh.AddFace(new Face(8, 7, 1));
-            mesh.AddFace(new Face(7, 8, 10));
-            mesh.AddFace(new Face(2, 5, 3));
-            mesh.AddFace(new Face(8, 1, 3));
-            mesh.AddFace(new Face(9, 2, 0));
-            mesh.AddFace(new Face(1, 7, 0));
-            mesh.AddFace(new Face(11, 9, 6));
-            mesh.AddFace(new Face(7, 10, 6));
-            mesh.AddFace(new Face(5, 11, 4));
-            mesh.AddFace(new Face(10, 8, 4));
-
-            return mesh;
         }
     }
 }
